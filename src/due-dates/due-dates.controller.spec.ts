@@ -37,18 +37,7 @@ describe('DueDatesController', () => {
   it('should call dueDateService.getDueDate with valid StartDateDTO', async () => {
     const validStartDate: StartDateDTO = { startDate: '2024-07-16', startTime:"", turnAroundTime:1 }; 
     controller.getDueDate(validStartDate);
-    expect(dueDateService.getDueDate).toHaveBeenCalledWith(validStartDate);
+    expect(dueDateService.getDueDate).toHaveBeenCalledWith(validStartDate);   // Mock the getDueDate function to throw the exception
   });
-
-  // it('should throw NotFoundException if dueDateService throws', async () => {
-  //   const invalidStartDate: StartDateDTO = { startDate: 'invalid-date-format', startTime:"", turnAroundTime:1  }; // Invalid date format
-  //   // dueDateService.getDueDate.mockImplementationOnce(() => {
-  //   //   throw new NotFoundException('Start date not found');
-  //   // });
-
-  //   expect(controller.getDueDate(invalidStartDate)).rejects.toThrow(
-  //     NotFoundException,
-  //   );
-  // });
 
 });
