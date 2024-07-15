@@ -1,4 +1,4 @@
-import { Controller, Get, Query } from '@nestjs/common';
+import { Body, Controller, Post, UsePipes, ValidationPipe } from '@nestjs/common';
 import { DueDatesService } from './due-dates.service';
 import { StartDateDTO } from './DueDates.dto';
 
@@ -9,8 +9,9 @@ export class DueDatesController {
 
     }
 
-    @Get()
-    getDueDate(@Query() param: StartDateDTO){
+    @Post()
+    @UsePipes(ValidationPipe)
+    getDueDate(@Body() param: StartDateDTO){
         return this.dueDateService.getDueDate(param);
     }
 }
