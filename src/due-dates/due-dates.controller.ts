@@ -1,8 +1,8 @@
-import { Controller, Get, Query } from '@nestjs/common';
+import { Body, Controller, Get, UsePipes, ValidationPipe } from '@nestjs/common';
 import { DueDatesService } from './due-dates.service';
 import { StartDateDTO } from './DueDates.dto';
 
-@Controller('due-dates')
+@Controller('dueDate')
 export class DueDatesController {
 
     constructor(private dueDateService: DueDatesService) {
@@ -10,7 +10,8 @@ export class DueDatesController {
     }
 
     @Get()
-    getDueDate(@Query() param: StartDateDTO){
+    @UsePipes(ValidationPipe)
+    getDueDate(@Body() param: StartDateDTO){
         return this.dueDateService.getDueDate(param);
     }
 }
