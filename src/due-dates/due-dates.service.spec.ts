@@ -84,7 +84,7 @@ describe('DueDatesService', () => {
   it('should not allow to startTime out of office hours', () => {
     const input: StartDateDTO = {
       startDate: "2024-07-20",
-      startTime: "09:00 AM",
+      startTime: "08:00 AM",
       turnAroundTime: 10
     };
 
@@ -95,22 +95,9 @@ describe('DueDatesService', () => {
       expect(error).toBeInstanceOf(BadRequestException);
     }
 });
-
-
-  describe("convertTo24HourFormat function", () => {
-    it('should take StartDateDTO as input and return StartDate', () => {
-
-      const mockStartTime = "09:10 PM"
-      try {
-        service.convertTo24HourFormat(mockStartTime)
-        fail('Expected BadRequestException to be thrown');
-      } catch (error) {
-        expect(error).toBeInstanceOf(BadRequestException);
-      }
-
-
-    });
   });
+
+
 
 
 

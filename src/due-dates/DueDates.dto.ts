@@ -14,7 +14,6 @@ export class StartDateDTO {
     turnAroundTime: number
 }
 
-export interface StartDate {
-    start: Date,
-    turnAroundTime: number
+export class StartDate {
+    start: String
 }
