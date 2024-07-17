@@ -41,6 +41,23 @@ describe('DueDatesService', () => {
       expect(result).toEqual(expect.any(Object));
     });
 
+    it('should return the correct output', () => {
+      const input: StartDateDTO = {
+        startDate: "2024-07-15",
+        startTime: "09:00 AM",
+        turnAroundTime: 10.5
+      };
+
+      const expectedOutput = {
+        dueDate: "2024-07-16",
+        dueTime: "11:30 AM"
+    }
+
+      const result = service.getDueDate(input);
+
+      expect(result).toEqual(expectedOutput);
+    });
+
     it('should not return a weekend date', () => {
       const input: StartDateDTO = {
         startDate: "2024-07-19",
@@ -57,13 +74,13 @@ describe('DueDatesService', () => {
 
       const expectedOutput = {
         dueDate: "2024-07-22",
-        dueTime: "10:00 AM",
-      }; // Replace with expected output
+        dueTime: "11:00 AM",
+      };
 
       const result = service.getDueDate(input);
 
       expect(result).toEqual(expectedOutput);
-      expect(result).not.toEqual(worngOutput); // Assert against unwanted output
+      expect(result).not.toEqual(worngOutput);
     });
 
     it('should not allow to startTime out of office hours', () => {
@@ -79,22 +96,22 @@ describe('DueDatesService', () => {
       } catch (error) {
         expect(error).toBeInstanceOf(BadRequestException);
       }
-  });
+    });
 
-  it('should not allow to startTime out of office hours', () => {
-    const input: StartDateDTO = {
-      startDate: "2024-07-20",
-      startTime: "08:00 AM",
-      turnAroundTime: 10
-    };
+    it('should not allow to startTime out of office hours', () => {
+      const input: StartDateDTO = {
+        startDate: "2024-07-20",
+        startTime: "19:00 PM",
+        turnAroundTime: 10
+      };
 
-    try {
-      service.getDueDate(input);
-      fail('Expected BadRequestException to be thrown');
-    } catch (error) {
-      expect(error).toBeInstanceOf(BadRequestException);
-    }
-});
+      try {
+        service.getDueDate(input);
+        fail('Expected BadRequestException to be thrown');
+      } catch (error) {
+        expect(error).toBeInstanceOf(BadRequestException);
+      }
+    });
   });
 
 

@@ -37,7 +37,7 @@ export class DueDatesService {
             }
         }
 
-        return { dueDate: dueDate.toLocaleDateString(), dueTime: this._converHoursToTimeFormat(startTimeInDecimalFormat) };
+        return { dueDate: this._convertDateToString(dueDate), dueTime: this._converHoursToTimeFormat(startTimeInDecimalFormat) };
 
     }
 
@@ -69,13 +69,15 @@ export class DueDatesService {
     }
 
     _converHoursToTimeFormat(startTime: number) {
-        const minutes: number = Math.floor(60 * (startTime - Math.floor(startTime)));
+        const minutes = (Math.floor(60 * (startTime - Math.floor(startTime)))).toString().padStart(2, '0');
         const hours: number = Math.floor(startTime);
+        const hoursString = hours.toString().padStart(2, '0');
+
 
         if (hours >= 12) {
-            return (hours == 12) ? `${hours}:${minutes} PM` : `${hours - 12}:${minutes} PM`;
+            return (hours == 12) ? `${hoursString}:${minutes} PM` : `${(hours - 12).toString().padStart(2, '0')}:${minutes} PM`;
         }
 
-        return `${hours}:${minutes} AM`;
+        return `${hoursString}:${minutes} AM`;
     }
 }
