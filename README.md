@@ -37,6 +37,8 @@ JSON
         "turnAroundTime": 11
 }
 
+reasoning of the input - if the input is like startDate: "Friday", the problem is if the turnAroundTime is more that 40 hours, it is hard to get a meaningful idea about the endDate.
+
 Response:
 
 JSON
