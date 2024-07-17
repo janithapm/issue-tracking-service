@@ -1,13 +1,12 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { StartDateDTO } from './DueDates.dto';
+import { startHour, endHour } from 'src/utils/constants';
 
 @Injectable()
 export class DueDatesService {
 
     getDueDate(startDateDTO: StartDateDTO) {
         const { startDate, startTime, turnAroundTime } = startDateDTO;
-        const startHour: number = 9;
-        const endHour: number = 17;
         const workingHours = endHour - startHour;
 
         let dueDate: Date = new Date(startDate);
