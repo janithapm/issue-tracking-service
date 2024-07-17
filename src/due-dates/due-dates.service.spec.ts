@@ -115,6 +115,41 @@ describe('DueDatesService', () => {
   });
 
 
+  describe(" _converHoursToTimeFormat function", ()=> {
+    it('should handle midnight', () => {
+      expect(service._converHoursToTimeFormat(0)).toBe('00:00 AM');
+    });
+  
+    it('should handle early morning', () => {
+      expect(service._converHoursToTimeFormat(5.25)).toBe('05:15 AM');
+    });
+  
+    it('should handle noon', () => {
+      expect(service._converHoursToTimeFormat(12)).toBe('12:00 PM');
+    });
+  
+    it('should handle afternoon', () => {
+      expect(service._converHoursToTimeFormat(14.75)).toBe('02:45 PM');
+    });
+  
+    it('should handle late afternoon', () => {
+      expect(service._converHoursToTimeFormat(17)).toBe('05:00 PM');
+    });
+  
+    it('should handle evening', () => {
+      expect(service._converHoursToTimeFormat(20.33)).toBe('08:19 PM');
+    });
+  
+    it('should handle just before midnight', () => {
+      expect(service._converHoursToTimeFormat(23.59)).toBe('11:35 PM');
+    });
+
+    it('should handle minutes greater than 59', () => {
+      expect(service._converHoursToTimeFormat(12.99)).toBe('12:59 PM');
+    });
+  });
+
+
 
 
 
